@@ -8,9 +8,14 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AuthIdentityWithJwtBearer.Application.Services
 {
-  public static class TokenService
+  public interface ITokenService
   {
-    public static string GenerateToken(User user)
+    string GenerateToken(User user);
+  }
+
+  public class TokenService : ITokenService
+  {
+    public string GenerateToken(User user)
     {
       var tokenHandler = new JwtSecurityTokenHandler();
       var key = Encoding.ASCII.GetBytes(Settings.Secret);

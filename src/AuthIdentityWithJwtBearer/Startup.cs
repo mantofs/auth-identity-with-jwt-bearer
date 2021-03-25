@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AuthIdentityWithJwtBearer.Application.Services;
 using AuthIdentityWithJwtBearer.Config;
+using AuthIdentityWithJwtBearer.Data;
+using AuthIdentityWithJwtBearer.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,10 +36,16 @@ namespace AuthIdentityWithJwtBearer
     {
 
       services.AddControllers();
+
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthIdentityWithJwtBearer", Version = "v1" });
       });
+
+      services.AddDbContext<DataContext>(c =>
+        c.UseSqlite(Configuration.GetConnectionString("Default")));
+
+      services.AddScoped<DataContext>();
 
       var key = Encoding.ASCII.GetBytes(Settings.Secret);
       services.AddAuthentication(x =>
@@ -55,6 +65,11 @@ namespace AuthIdentityWithJwtBearer
           ValidateAudience = false
         };
       });
+
+      services.AddScoped<IAuthService, AuthService>();
+      services.AddScoped<ITokenService, TokenService>();
+
+      services.AddScoped<IUserRepository, UserRepository>();
 
     }
 
