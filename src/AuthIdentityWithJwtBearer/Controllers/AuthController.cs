@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
+using AuthIdentityWithJwtBearer.Application.Services;
 using AuthIdentityWithJwtBearer.Domain.Entities;
 using AuthIdentityWithJwtBearer.Repositories;
-using AuthIdentityWithJwtBearer.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthIdentityWithJwtBearer.Controllers

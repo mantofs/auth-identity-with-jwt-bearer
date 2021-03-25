@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AuthIdentityWithJwtBearer.Domain\AuthIdentityWithJwtBearer.Domain.csproj" />
+    <ProjectReference Include="..\AuthIdentityWithJwtBearer.Application\AuthIdentityWithJwtBearer.Application.csproj" />
   </ItemGroup>
 
 </Project>
