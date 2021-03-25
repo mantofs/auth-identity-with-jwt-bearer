@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AuthIdentityWithJwtBearer.Config;
-using AuthIdentityWithJwtBearer.Entities;
+using AuthIdentityWithJwtBearer.Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AuthIdentityWithJwtBearer.Services

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using AuthIdentityWithJwtBearer.Entities;
+using AuthIdentityWithJwtBearer.Domain.Entities;
 using AuthIdentityWithJwtBearer.Repositories;
 using AuthIdentityWithJwtBearer.Services;
 using Microsoft.AspNetCore.Mvc;
