@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9B85D8E3-DFF7-4620-AA41-41789DB69F18}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthIdentityWithJwtBearer", "src\AuthIdentityWithJwtBearer\AuthIdentityWithJwtBearer.csproj", "{2AB1A5DA-035E-4167-AC09-02291F5096FD}"
 EndProject
 Global
@@ -34,6 +32,5 @@ Global
 		{2AB1A5DA-035E-4167-AC09-02291F5096FD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2AB1A5DA-035E-4167-AC09-02291F5096FD} = {9B85D8E3-DFF7-4620-AA41-41789DB69F18}
 	EndGlobalSection
 EndGlobal
