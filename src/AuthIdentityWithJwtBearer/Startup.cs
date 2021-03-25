@@ -47,7 +47,10 @@ namespace AuthIdentityWithJwtBearer
 
       services.AddScoped<DataContext>();
 
-      var key = Encoding.ASCII.GetBytes(Settings.Secret);
+      var authSection = Configuration.GetSection("Authentication");
+      services.Configure<Settings>(authSection);
+      var settings = authSection.Get<Settings>();
+
       services.AddAuthentication(x =>
       {
         x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -60,9 +63,11 @@ namespace AuthIdentityWithJwtBearer
         x.TokenValidationParameters = new TokenValidationParameters
         {
           ValidateIssuerSigningKey = true,
-          IssuerSigningKey = new SymmetricSecurityKey(key),
-          ValidateIssuer = false,
-          ValidateAudience = false
+          IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(settings.SecretKey)),
+          ValidateIssuer = true,
+          ValidateAudience = true,
+          ValidAudience = settings.Audience,
+          ValidIssuer = settings.Issuer
         };
       });
 
