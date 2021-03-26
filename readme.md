@@ -1,5 +1,7 @@
-# Projeto criado para exemplificar uma autenticação utilizando o Identity e Jwt
+## Projeto criado para exemplificar uma autenticação utilizando o Identity e Jwt
 
-## Execute o migrations para criação do banco de dados
+### Para criação do banco de dados
+
+Na camada 'Data' execute o seguinte comando:
 
 `dotnet ef database update -s ../AuthIdentityWithJwtBearer -c AuthContext`
