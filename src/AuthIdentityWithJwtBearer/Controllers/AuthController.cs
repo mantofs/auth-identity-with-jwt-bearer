@@ -20,51 +20,29 @@ namespace AuthIdentityWithJwtBearer.Controllers
 
     [HttpPost]
     [Route("login")]
-    public ActionResult<dynamic> Authenticate([FromBody] User model)
+    public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] User model)
     {
-      // Recupera o usuário
-      var user = _authService.SignIn(model);
 
-      // Verifica se o usuário existe
-      if (user == null)
+      if (!await _authService.SignIn(model))
         return NotFound(new { message = "Usuário ou senha inválidos" });
 
       // Gera o Token
-      var token = _tokenService.GenerateToken(user);
+      var token = await _tokenService.GenerateTokenAsync(model);
 
-      // Oculta a senha
-      user.Password = "";
+      return Ok(new { token });
 
-      // Retorna os dados
-      return new
-      {
-        user = user,
-        token = token
-      };
     }
+
     [HttpPost]
     [Route("signup")]
-    public async Task<ActionResult<dynamic>> Create([FromBody] User model)
+    public async Task<ActionResult> Create([FromBody] User model)
     {
-      // Recupera o usuário
-      var user = await _authService.SignUp(model);
+      await _authService.SignUp(model);
 
-      // Verifica se o usuário existe
-      if (user == null)
-        return NotFound(new { message = "Usuário ou senha inválidos" });
+      var token = await _tokenService.GenerateTokenAsync(model);
 
-      // Gera o Token
-      var token = _tokenService.GenerateToken(user);
+      return Ok(new { token });
 
-      // Oculta a senha
-      user.Password = "";
-
-      // Retorna os dados
-      return new
-      {
-        user = user,
-        token = token
-      };
     }
   }
 }

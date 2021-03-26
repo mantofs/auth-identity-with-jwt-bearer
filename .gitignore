@@ -5,3 +5,6 @@
 
 #VSCode
 .vscode
+
+#Sqlite
+*.db

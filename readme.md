@@ -1,6 +1,5 @@
-Projeto criado para exemplificar uma autenticação utilizando o Identity e Jwt
+# Projeto criado para exemplificar uma autenticação utilizando o Identity e Jwt
 
-- Passo 1
-  dotnet restore
-  dotnet add package Microsoft.AspNetCore.Authentication
-  dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+## Execute o migrations para criação do banco de dados
+
+`dotnet ef database update -s ../AuthIdentityWithJwtBearer -c AuthContext`

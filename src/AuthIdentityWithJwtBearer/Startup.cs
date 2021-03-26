@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -45,7 +46,15 @@ namespace AuthIdentityWithJwtBearer
       services.AddDbContext<DataContext>(c =>
         c.UseSqlite(Configuration.GetConnectionString("Default")));
 
+      services.AddDbContext<AuthContext>(c =>
+        c.UseSqlite(Configuration.GetConnectionString("Auth")));
+
       services.AddScoped<DataContext>();
+      services.AddScoped<AuthContext>();
+
+      services.AddIdentity<IdentityUser, IdentityRole>()
+              .AddEntityFrameworkStores<AuthContext>()
+              .AddDefaultTokenProviders();
 
       var authSection = Configuration.GetSection("Authentication");
       services.Configure<Settings>(authSection);
@@ -74,7 +83,7 @@ namespace AuthIdentityWithJwtBearer
       services.AddScoped<IAuthService, AuthService>();
       services.AddScoped<ITokenService, TokenService>();
 
-      services.AddScoped<IUserRepository, UserRepository>();
+      services.AddScoped<IAuthRepository, AuthRepository>();
 
     }
 

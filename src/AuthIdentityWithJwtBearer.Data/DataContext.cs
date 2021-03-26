@@ -1,5 +1,6 @@
 using System.Linq;
 using AuthIdentityWithJwtBearer.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthIdentityWithJwtBearer.Data
@@ -13,5 +14,10 @@ namespace AuthIdentityWithJwtBearer.Data
       modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
     }
 
+  }
+
+  public class AuthContext : IdentityDbContext
+  {
+    public AuthContext(DbContextOptions<AuthContext> opt) : base(opt) { }
   }
 }

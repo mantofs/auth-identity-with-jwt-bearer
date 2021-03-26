@@ -1,4 +1,5 @@
 using System;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,11 @@ namespace AuthIdentityWithJwtBearer.Controllers
     [HttpGet]
     [Route("authenticated")]
     [Authorize]
-    public string Authenticated() => String.Format("Autenticado - {0}", User.Identity.Name);
+    public ActionResult Authenticated()
+    {
+      return Ok(String.Format("Autenticado - {0} - {1}", User.Identity.Name,
+      User.FindFirst(c => c.Type == ClaimTypes.Role).Value));
+    }
 
     [HttpGet]
     [Route("employee")]
